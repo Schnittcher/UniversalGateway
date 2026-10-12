@@ -1,9 +1,12 @@
 # UniversalGateway
-Mit diesem Modul ist es möglich Variablen synchron zu halten, ohne mehrere Scripte oder Variablen anlegen zu müssen.
+Hält Variablenpaare synchron, ohne dass Skripte oder Hilfsvariablen nötig sind. Ändert sich eine Variable eines Paares, setzt die Instanz die andere Variable per `RequestAction` auf denselben Wert. Die Synchronisation läuft in beide Richtungen. Die Instanz legt selbst keine Variablen an.
 
-## Inhaltverzeichnis
+## Inhaltsverzeichnis
 1. [Konfiguration](#1-konfiguration)
-2. [Funktionen](#2-funktionen)
+2. [Variablen](#2-variablen)
+3. [Funktionen](#3-funktionen)
+4. [Spenden](#4-spenden)
+5. [Lizenz](#5-lizenz)
 
 ## 1. Konfiguration
 
@@ -13,6 +16,25 @@ Name | Dient nur zur Übersicht! hat keine weitere Funktion!
 Variable 1| Variable 1 welche Synchron zu Variable 2 gehalten wird.
 Variable 2| Variable 2 welche Synchron zu Variable 1 gehalten wird.
 
-## 2. Funktionen
+Hinweise:
+* Beide Variablen sollten denselben Typ haben und die Aktion der Zielvariable muss einen passenden Wert annehmen.
+* Eine Variable sollte nur in einem Paar vorkommen, sonst gilt das erste passende Paar.
+* Nicht mehr vorhandene Variablen werden ignoriert.
+
+## 2. Variablen
+
+Die Instanz legt keine Variablen an.
+
+## 3. Funktionen
 
 Keine Funktionen vorhanden.
+
+## 4. Spenden
+
+Dieses Modul ist für die nicht kommerzielle Nutzung kostenlos, Schenkungen als Unterstützung für den Autor werden hier akzeptiert:
+
+[![PayPal](https://img.shields.io/badge/PayPal-Spenden-00457C?logo=paypal&logoColor=white&style=for-the-badge)](https://www.paypal.com/donate?hosted_button_id=EK4JRP87XLSHW) [![Amazon Wunschzettel](https://img.shields.io/badge/Amazon-Wunschzettel-FF9900?logo=amazon&logoColor=white&style=for-the-badge)](https://www.amazon.de/hz/wishlist/ls/3JVWED9SZMDPK?ref_=wl_share)
+
+## 5. Lizenz
+
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
