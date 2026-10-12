@@ -2,41 +2,49 @@
 
 declare(strict_types=1);
 
-class UniversalGateway extends IPSModule
+class UniversalGateway extends IPSModuleStrict
 {
-    public function Create()
+    public function Create(): void
     {
         //Never delete this line!
         parent::Create();
         $this->RegisterPropertyString('Variables', '[]');
     }
 
-    public function ApplyChanges()
+    public function ApplyChanges(): void
     {
         //Never delete this line!
         parent::ApplyChanges();
 
-        $DevicesJSON = $this->ReadPropertyString('Variables');
-        if ($DevicesJSON != '') {
-            $Variables = json_decode($DevicesJSON);
-            foreach ($Variables as $key=>$Variable) {
-                $this->RegisterMessage($Variable->VariableID1, VM_UPDATE);
-                $this->RegisterMessage($Variable->VariableID2, VM_UPDATE);
+        // Alte Registrierungen entfernen, sonst bleiben entfernte oder geänderte Paare aktiv
+        foreach ($this->GetMessageList() as $SenderID => $Messages) {
+            foreach ($Messages as $Message) {
+                $this->UnregisterMessage($SenderID, $Message);
+            }
+        }
+
+        foreach ($this->getVariablePairs() as $Pair) {
+            foreach ([$Pair['VariableID1'], $Pair['VariableID2']] as $VariableID) {
+                if ($VariableID > 0 && IPS_VariableExists($VariableID)) {
+                    $this->RegisterMessage($VariableID, VM_UPDATE);
+                } else {
+                    $this->SendDebug(__FUNCTION__, 'Variable ' . $VariableID . ' existiert nicht und wird ignoriert', 0);
+                }
             }
         }
     }
 
-    public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
+    public function MessageSink(int $TimeStamp, int $SenderID, int $Message, array $Data): void
     {
         $this->SendDebug(__FUNCTION__, 'SenderID ' . $SenderID . ' Message: ' . $Message, 0);
         switch ($Message) {
             case VM_UPDATE:
                 $AssociatedVariable = $this->getAssociatedVariable($SenderID);
                 $this->SendDebug(__FUNCTION__, 'SenderID ' . $SenderID . ' AssociatedVariable: ' . $AssociatedVariable, 0);
-                if ($AssociatedVariable) {
+                if ($AssociatedVariable > 0 && IPS_VariableExists($AssociatedVariable)) {
                     $AssociatedValue = GetValue($AssociatedVariable);
                     $SenderValue = GetValue($SenderID);
-                    $this->SendDebug(__FUNCTION__, 'AssociatedValue ' . $AssociatedValue . ' SenderValue: ' . $SenderValue, 0);
+                    $this->SendDebug(__FUNCTION__, 'AssociatedValue ' . json_encode($AssociatedValue) . ' SenderValue: ' . json_encode($SenderValue), 0);
                     if ($AssociatedValue != $SenderValue) {
                         $this->SendDebug(__FUNCTION__, 'RequestAction', 0);
                         RequestAction($AssociatedVariable, $SenderValue);
@@ -49,17 +57,34 @@ class UniversalGateway extends IPSModule
         }
     }
 
-    private function getAssociatedVariable($VariableID)
+    /**
+     * Liefert die konfigurierten Variablenpaare mit ganzzahligen Variablen-IDs.
+     */
+    private function getVariablePairs(): array
     {
-        $VariablesJSON = $this->ReadPropertyString('Variables');
-        $Variables = json_decode($VariablesJSON);
+        $Variables = json_decode($this->ReadPropertyString('Variables'), true);
+        if (!is_array($Variables)) {
+            return [];
+        }
+        $Pairs = [];
         foreach ($Variables as $Variable) {
-            if ($Variable->VariableID1 == $VariableID) {
-                return $Variable->VariableID2;
-            } elseif ($Variable->VariableID2 == $VariableID) {
-                return $Variable->VariableID1;
+            $Pairs[] = [
+                'VariableID1' => (int) ($Variable['VariableID1'] ?? 0),
+                'VariableID2' => (int) ($Variable['VariableID2'] ?? 0)
+            ];
+        }
+        return $Pairs;
+    }
+
+    private function getAssociatedVariable(int $VariableID): int
+    {
+        foreach ($this->getVariablePairs() as $Pair) {
+            if ($Pair['VariableID1'] == $VariableID) {
+                return $Pair['VariableID2'];
+            } elseif ($Pair['VariableID2'] == $VariableID) {
+                return $Pair['VariableID1'];
             }
         }
-        return false;
+        return 0;
     }
 }

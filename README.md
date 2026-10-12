@@ -1,42 +1,52 @@
 [![Version](https://img.shields.io/badge/Symcon-PHPModul-red.svg)](https://www.symcon.de/service/dokumentation/entwicklerbereich/sdk-tools/sdk-php/)
-![Version](https://img.shields.io/badge/Symcon%20Version-5.1%20%3E-blue.svg)
+![Version](https://img.shields.io/badge/Symcon%20Version-9.0%20%3E-blue.svg)
 [![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-green.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
-[![Check Style](https://github.com/Schnittcher/IPS-UniversalGateway/workflows/Check%20Style/badge.svg)](https://github.com/Schnittcher/IPS-UniversalGateway/actions)
-# IPS-UniversalGateway
+[![Check Style](https://github.com/Schnittcher/UniversalGateway/actions/workflows/style.yml/badge.svg)](https://github.com/Schnittcher/UniversalGateway/actions/workflows/style.yml)
+[![Tests](https://github.com/Schnittcher/UniversalGateway/actions/workflows/tests.yml/badge.svg)](https://github.com/Schnittcher/UniversalGateway/actions/workflows/tests.yml)
+
+# UniversalGateway
 Mit diesem Modul ist es möglich Variablen synchron zu halten, ohne mehrere Scripte oder Variablen anlegen zu müssen.
 
-## Inhaltverzeichnis
-- [IPS-UniversalGateway](#ips-universalgateway)
-  - [Inhaltverzeichnis](#inhaltverzeichnis)
+## Inhaltsverzeichnis
+- [UniversalGateway](#universalgateway)
+  - [Inhaltsverzeichnis](#inhaltsverzeichnis)
   - [1. Voraussetzungen](#1-voraussetzungen)
-  - [2. Enthaltene Module](#2-enthaltene-module)
-    - [UniversalGateway](#universalgateway)
-  - [3. Installation](#3-installation)
-  - [4. Konfiguration in IP-Symcon](#4-konfiguration-in-ip-symcon)
-  - [5. Spenden](#5-spenden)
-  - [6. Lizenz](#6-lizenz)
+  - [2. Funktionsumfang](#2-funktionsumfang)
+  - [3. Enthaltene Module](#3-enthaltene-module)
+  - [4. Installation](#4-installation)
+  - [5. Konfiguration in IP-Symcon](#5-konfiguration-in-ip-symcon)
+  - [6. Spenden](#6-spenden)
+  - [7. Lizenz](#7-lizenz)
 
 ## 1. Voraussetzungen
 
-* mindestens IPS Version 5.1
+* mindestens IPS Version 9.0
 
-## 2. Enthaltene Module
+## 2. Funktionsumfang
 
-### UniversalGateway
+* Beliebig viele Variablenpaare in beide Richtungen synchron halten
+* Der neue Wert wird über die Aktion der Zielvariable gesetzt, das Gerät wird also tatsächlich geschaltet
 
-## 3. Installation
+Die einzelnen Funktionen stehen bei den Instanzen unter "Enthaltene Module" und in der README des jeweiligen Moduls.
 
-Über den IP-Symcon Modul Store.
+## 3. Enthaltene Module
 
-## 4. Konfiguration in IP-Symcon
-Bitte den einzelnen Modulen entnehme.
+* [UniversalGateway](UniversalGateway/README.md)
+  * Hält Variablenpaare synchron: Ändert sich eine Variable eines Paares, wird der Wert über die Aktion der anderen Variable übernommen.
 
-## 5. Spenden
+## 4. Installation
 
-Dieses Modul ist für die nicht kommzerielle Nutzung kostenlos, Schenkungen als Unterstützung für den Autor werden hier akzeptiert:    
+Die Installation erfolgt über den IP-Symcon Module Store.
 
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EK4JRP87XLSHW" target="_blank"><img src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donate_LG.gif" border="0" /></a>
+## 5. Konfiguration in IP-Symcon
+Eine Instanz UniversalGateway anlegen und die Variablenpaare in der Liste eintragen. Details stehen in der [README des Moduls](UniversalGateway/README.md).
 
-## 6. Lizenz
+## 6. Spenden
+
+Dieses Modul ist für die nicht kommerzielle Nutzung kostenlos, Schenkungen als Unterstützung für den Autor werden hier akzeptiert:
+
+[![PayPal](https://img.shields.io/badge/PayPal-Spenden-00457C?logo=paypal&logoColor=white&style=for-the-badge)](https://www.paypal.com/donate?hosted_button_id=EK4JRP87XLSHW) [![Amazon Wunschzettel](https://img.shields.io/badge/Amazon-Wunschzettel-FF9900?logo=amazon&logoColor=white&style=for-the-badge)](https://www.amazon.de/hz/wishlist/ls/3JVWED9SZMDPK?ref_=wl_share)
+
+## 7. Lizenz
 
 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
