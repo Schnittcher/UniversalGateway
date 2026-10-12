@@ -24,7 +24,9 @@ Mit diesem Modul ist es möglich Variablen synchron zu halten, ohne mehrere Scri
 
 ## 2. Funktionsumfang
 
-* Beliebig viele Variablenpaare in beide Richtungen synchron halten
+* Beliebig viele Variablenpaare synchron halten, wahlweise in beide Richtungen oder nur in eine
+* Watchdog gleicht die Paare regelmäßig ab, falls eine Seite zeitweise offline war
+* Statusvariablen zeigen, ob alle Paare synchron sind und ob ein Nachsetzen fehlschlug
 * Der neue Wert wird über die Aktion der Zielvariable gesetzt, das Gerät wird also tatsächlich geschaltet
 
 Die einzelnen Funktionen stehen bei den Instanzen unter "Enthaltene Module" und in der README des jeweiligen Moduls.

@@ -1,6 +1,17 @@
 {
     "elements": [
         {
+            "type": "NumberSpinner",
+            "name": "WatchdogInterval",
+            "caption": "Watchdog-Intervall",
+            "suffix": "Sekunden",
+            "minimum": 0
+        },
+        {
+            "type": "Label",
+            "caption": "Der Watchdog gleicht die Paare regelmäßig ab und setzt abweichende Werte nach. 0 schaltet ihn aus. Bei einer Richtung (→ oder ←) gewinnt immer die Quellvariable. Bei beiden Richtungen (↔) gewinnt die Variable, die zuletzt aktualisiert wurde."
+        },
+        {
             "type": "List",
             "name": "Variables",
             "caption": "Variablen",
@@ -37,6 +48,29 @@
                     "add": 0,
                     "edit": {
                         "type": "SelectVariable"
+                    }
+                },
+                {
+                    "caption": "Richtung",
+                    "name": "Direction",
+                    "width": "200px",
+                    "add": 0,
+                    "edit": {
+                        "type": "Select",
+                        "options": [
+                            {
+                                "caption": "Variable 1 ↔ Variable 2",
+                                "value": 0
+                            },
+                            {
+                                "caption": "Variable 1 → Variable 2",
+                                "value": 1
+                            },
+                            {
+                                "caption": "Variable 1 ← Variable 2",
+                                "value": 2
+                            }
+                        ]
                     }
                 }
             ],
